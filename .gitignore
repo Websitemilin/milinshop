@@ -1,0 +1,15 @@
+.env
+.env.local
+.env.*.local
+*.log
+node_modules/
+dist/
+build/
+.turbo/
+.next/
+.DS_Store
+*.swp
+*.iml
+.idea/
+coverage/
+.vscode/local.code-workspace

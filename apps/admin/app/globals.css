@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply border-pink-100;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-gradient-to-b from-white via-pink-50 to-pink-100 font-body;
+}
+
+h1, h2, h3 {
+  @apply font-display font-bold text-milin-900;
+}
+
+a {
+  @apply text-milin-600 hover:text-milin-700 transition-colors;
+}
+
+input,
+textarea,
+select {
+  @apply focus:outline-none focus:ring-2 focus:ring-milin-500 focus:border-transparent;
+}
+
+button:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+/* Luxury button styles */
+.btn-primary {
+  @apply bg-milin-500 hover:bg-milin-600 text-white font-medium py-2 px-4 rounded-lg transition-all shadow-md hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-milin-50 hover:bg-milin-100 text-milin-700 font-medium py-2 px-4 rounded-lg transition-all border border-milin-200;
+}
+
+/* Gradient accents */
+.gradient-milin {
+  @apply bg-gradient-to-r from-milin-500 via-rose-400 to-milin-600;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-milin-600 to-rose-500 bg-clip-text text-transparent font-display;
+}

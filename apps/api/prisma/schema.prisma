@@ -1,0 +1,349 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER & AUTHENTICATION
+// ============================================
+
+model User {
+  id                String     @id @default(cuid())
+  email             String     @unique
+  password          String
+  firstName         String
+  lastName          String
+  phone             String?
+  avatar            String?
+  role              UserRole   @default(USER)
+  emailVerified     Boolean    @default(false)
+  emailVerifiedAt   DateTime?
+  isActive          Boolean    @default(true)
+  lastLoginAt       DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  deletedAt         DateTime?
+
+  profile           Profile?
+  cart              Cart?
+  orders            Order[]
+  payments          Payment[]
+  refreshTokens     RefreshToken[]
+  auditLogs         AuditLog[]
+
+  @@index([email])
+  @@index([role])
+  @@index([createdAt])
+  @@index([isActive])
+}
+
+enum UserRole {
+  ADMIN
+  VENDOR
+  USER
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  bio       String?
+  address   String?
+  city      String?
+  country   String?
+  zipCode   String?
+  preferences Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  token     String   @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([revokedAt])
+}
+
+// ============================================
+// PRODUCTS & CATEGORIES
+// ============================================
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  description String?
+  image     String?
+  parentId  String?
+  parent    Category? @relation("ParentChildren", fields: [parentId], references: [id], onDelete: SetNull)
+  
+  children  Category[] @relation("ParentChildren")
+  products  Product[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentId])
+  @@index([slug])
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String   @db.Text
+  categoryId    String
+  category      Category @relation(fields: [categoryId], references: [id])
+  
+  dailyPrice    Float
+  depositPrice  Float    @default(0)
+  stock         Int      @default(1)
+  status        ProductStatus @default(DRAFT)
+  
+  colors        String[]
+  sizes         String[]
+  material      String?
+  condition     String?
+  
+  images        ProductImage[]
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deletedAt     DateTime?
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  url       String
+  alt       String?
+  order     Int      @default(0)
+  
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+  @@unique([productId, order])
+}
+
+// ============================================
+// CART
+// ============================================
+
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  items     CartItem[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model CartItem {
+  id              String   @id @default(cuid())
+  cartId          String
+  cart            Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  quantity        Int      @default(1)
+  rentalFromDate  DateTime
+  rentalToDate    DateTime
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([cartId])
+  @@index([productId])
+  @@unique([cartId, productId, rentalFromDate, rentalToDate])
+}
+
+// ============================================
+// ORDERS & PAYMENTS
+// ============================================
+
+model Order {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  items               OrderItem[]
+  
+  subtotal            Float
+  tax                 Float    @default(0)
+  deposit             Float
+  total               Float
+  
+  status              OrderStatus @default(PENDING)
+  deliveryAddress     String?
+  notes               String?
+  
+  paymentIntentId     String?  @unique
+  payment             Payment? @relation("OrderPayment")
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  deliveredAt         DateTime?
+  returnedAt          DateTime?
+  deletedAt           DateTime?
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([paymentIntentId])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  RETURNED
+  CANCELLED
+  REFUNDED
+}
+
+model OrderItem {
+  id              String   @id @default(cuid())
+  orderId         String
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id])
+  
+  quantity        Int      @default(1)
+  dailyPrice      Float
+  depositPrice    Float
+  rentalFromDate  DateTime
+  rentalToDate    DateTime
+  
+  status          OrderStatus @default(PENDING)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([productId])
+  @@unique([orderId, productId, rentalFromDate, rentalToDate])
+}
+
+model Payment {
+  id                    String   @id @default(cuid())
+  orderId               String   @unique
+  order                 Order    @relation("OrderPayment", fields: [orderId], references: [id], onDelete: Cascade)
+  
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  amount                Float
+  currency              String   @default("USD")
+  status                PaymentStatus @default(PENDING)
+  
+  stripePaymentIntentId String   @unique
+  stripeChargeId        String?  @unique
+  
+  metadata              Json?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  failureReason         String?
+  failedAt              DateTime?
+
+  @@index([userId])
+  @@index([orderId])
+  @@index([status])
+  @@index([stripePaymentIntentId])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+// ============================================
+// AUDIT & LOGGING
+// ============================================
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  action    String
+  entity    String
+  entityId  String
+  changes   Json?
+  metadata  Json?
+  
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entity])
+  @@index([entityId])
+  @@index([createdAt])
+}
+
+// ============================================
+// INDEXES FOR PERFORMANCE
+// ============================================
+
+// Rental availability queries
+// Need to find non-conflicting orders for a product in a date range
+// Typical query: find orders where product = X and dates overlap with [from, to]
+// This is already indexed via Order.productId and cartItem/orderItem datetime fields
+
+// ============================================
+// CONSTRAINTS & VALIDATION
+// ============================================
+
+// Handled by application layer:
+// - rentalToDate > rentalFromDate validation
+// - quantity > 0 validation
+// - prices > 0 validation
+// - Email format validation
+// - Stripe idempotency via unique paymentIntentId

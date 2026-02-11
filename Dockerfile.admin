@@ -1,0 +1,25 @@
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+COPY packages ./packages
+COPY apps/admin ./apps/admin
+
+WORKDIR /app/apps/admin
+RUN yarn install --frozen-lockfile
+RUN yarn build
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/apps/admin/.next ./.next
+COPY --from=builder /app/apps/admin/public ./public
+COPY --from=builder /app/apps/admin/package.json ./
+
+RUN yarn install --production --frozen-lockfile
+
+EXPOSE 3001
+
+CMD ["yarn", "start"]
