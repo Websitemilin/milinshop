@@ -9,7 +9,7 @@ import { Mail, Lock, Eye, EyeOff, Loader, AlertCircle, Sparkles } from 'lucide-r
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@mirinshop.com');
+  const [email, setEmail] = useState('admin@milinshop.com');
   const [password, setPassword] = useState('Admin@123456');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -68,7 +68,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@mirinshop.com"
+                  placeholder="admin@milinshop.com"
                   className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-mirin-500 focus:border-transparent"
                   disabled={loading}
                   required
@@ -132,7 +132,7 @@ export default function LoginPage() {
               <span className="text-gray-600">Admin:</span>
               <br />
               <code className="bg-white px-2 py-1 rounded text-xs font-mono">
-                admin@mirinshop.com / Admin@123456
+                admin@milinshop.com / Admin@123456
               </code>
             </p>
             <p>
