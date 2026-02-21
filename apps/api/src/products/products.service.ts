@@ -50,6 +50,9 @@ export class ProductsService {
   }
 
   async getProducts(query: ProductQueryDto) {
+    // Support both pageSize and limit as aliases
+    const effectivePageSize = query.limit || query.pageSize || 20;
+    const effectivePage = query.page || 1;
     const where: any = { deletedAt: null, status: 'PUBLISHED' };
 
     if (query.categoryId) {
@@ -75,13 +78,13 @@ export class ProductsService {
       }
     }
 
-    const skip = (query.page - 1) * query.pageSize;
+    const skip = (effectivePage - 1) * effectivePageSize;
 
     const [products, total] = await Promise.all([
       this.prisma.product.findMany({
         where,
         skip,
-        take: query.pageSize,
+        take: effectivePageSize,
         include: { images: true, category: true },
         orderBy: { createdAt: 'desc' },
       }),
@@ -91,9 +94,9 @@ export class ProductsService {
     return {
       items: products,
       total,
-      page: query.page,
-      pageSize: query.pageSize,
-      totalPages: Math.ceil(total / query.pageSize),
+      page: effectivePage,
+      pageSize: effectivePageSize,
+      totalPages: Math.ceil(total / effectivePageSize),
     };
   }
 

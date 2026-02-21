@@ -330,7 +330,8 @@ async function main() {
           rentalFromDate: tomorrow,
           rentalToDate: dayAfter,
           quantity: 1,
-          price: 2500,
+          dailyPrice: 2500,
+          depositPrice: 8000,
         },
       },
     },
@@ -340,7 +341,7 @@ async function main() {
     data: {
       orderId: sampleOrder.id,
       userId: customer1.id,
-      paymentIntentId: 'pi_demo_12345',
+      stripePaymentIntentId: 'pi_demo_12345',
       amount: 10700,
       currency: 'THB',
       status: 'SUCCEEDED',

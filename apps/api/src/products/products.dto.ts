@@ -1,4 +1,5 @@
-import { IsString, IsNumber, IsOptional, IsArray, IsEnum, IsUUID } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsArray, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum ProductCondition {
@@ -18,20 +19,23 @@ export class CreateProductDto {
   description: string;
 
   @ApiProperty()
-  @IsUUID()
+  @IsString()
   categoryId: string;
 
   @ApiProperty()
   @IsNumber()
+  @Type(() => Number)
   dailyPrice: number;
 
   @ApiProperty()
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   depositPrice?: number;
 
   @ApiProperty()
   @IsNumber()
+  @Type(() => Number)
   stock: number;
 
   @ApiProperty({ required: false })
@@ -69,11 +73,13 @@ export class UpdateProductDto {
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   dailyPrice?: number;
 
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   stock?: number;
 
   @ApiProperty({ required: false })
@@ -91,15 +97,23 @@ export class ProductQueryDto {
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   page: number = 1;
 
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   pageSize: number = 20;
 
   @ApiProperty({ required: false })
-  @IsUUID()
+  @IsNumber()
+  @IsOptional()
+  @Type(() => Number)
+  limit?: number;
+
+  @ApiProperty({ required: false })
+  @IsString()
   @IsOptional()
   categoryId?: string;
 
@@ -111,10 +125,12 @@ export class ProductQueryDto {
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   minPrice?: number;
 
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   maxPrice?: number;
 }

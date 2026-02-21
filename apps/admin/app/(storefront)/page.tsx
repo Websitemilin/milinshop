@@ -32,15 +32,17 @@ export default function StorefrontHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const categoryParam = selectedCategory ? `&categoryId=${selectedCategory}` : '';
         const [productsRes, categoriesRes] = await Promise.all([
-          api.get('/products?page=1&limit=12'),
-          api.get('/health/categories'),
+          api.get(`/products?page=1&pageSize=12${categoryParam}`),
+          api.get('/categories').catch(() => ({ data: [] })),
         ]);
 
-        setProducts(productsRes.data.items);
+        setProducts(productsRes.data.items || []);
         setCategories(Array.isArray(categoriesRes.data) ? categoriesRes.data : (categoriesRes.data.items || []));
       } catch (error) {
         console.error('Failed to fetch:', error);
+        setProducts([]);
       } finally {
         setLoading(false);
       }
