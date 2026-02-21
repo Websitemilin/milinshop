@@ -148,13 +148,3 @@ export default function LoginPage() {
     </main>
   );
 }
-          </form>
-
-          <p className="text-center text-sm text-gray-600 mt-6">
-            Demo credentials: admin@luxerental.com / Admin@123
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}

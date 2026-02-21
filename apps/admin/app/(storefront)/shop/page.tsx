@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import Link from 'next/link';
-import { ProductCard } from '@/components/product-card';
 import { Heart, ShoppingBag, Sparkles } from 'lucide-react';
 
 interface Product {
@@ -31,13 +30,15 @@ export default function StorefrontHome() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
+        const categoryParam = selectedCategory ? `&categoryId=${selectedCategory}` : '';
         const [productsRes, categoriesRes] = await Promise.all([
-          api.get('/products?page=1&limit=12'),
+          api.get(`/products?page=1&pageSize=12${categoryParam}`),
           api.get('/health/categories'),
         ]);
 
-        setProducts(productsRes.data.items);
+        setProducts(productsRes.data.items || []);
         setCategories(Array.isArray(categoriesRes.data) ? categoriesRes.data : (categoriesRes.data.items || []));
       } catch (error) {
         console.error('Failed to fetch:', error);
@@ -60,13 +61,18 @@ export default function StorefrontHome() {
             <Sparkles className="w-8 h-8" />
           </div>
           <p className="text-xl md:text-2xl mb-4 font-light">
-            Luxury Women\'s Fashion Rental
+            Luxury Women&apos;s Fashion Rental
           </p>
           <p className="text-lg max-w-2xl mx-auto mb-8 opacity-90">
             Rent premium designer pieces for every occasion. From elegant evening gowns to chic blazers, 
             access the luxury wardrobe of your dreams.
           </p>
-          <button className="bg-white text-milin-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow">
+          <button
+            onClick={() => {
+              document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="bg-white text-milin-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow"
+          >
             Shop Now
           </button>
         </div>
@@ -106,14 +112,24 @@ export default function StorefrontHome() {
         <section className="py-12 px-8">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-display font-bold text-milin-900 mb-8">Shop by Category</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className={`px-6 py-3 rounded-full font-semibold transition-all ${
+                  selectedCategory === null
+                    ? 'bg-milin-500 text-white shadow-md'
+                    : 'bg-pink-100 text-milin-900 hover:bg-milin-200'
+                }`}
+              >
+                All
+              </button>
               {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`px-6 py-3 rounded-full font-semibold transition-all ${
                     selectedCategory === cat.id
-                      ? 'bg-milin-500 text-white'
+                      ? 'bg-milin-500 text-white shadow-md'
                       : 'bg-pink-100 text-milin-900 hover:bg-milin-200'
                   }`}
                 >
@@ -126,7 +142,7 @@ export default function StorefrontHome() {
       )}
 
       {/* Products Grid */}
-      <section className="py-12 px-8 bg-gradient-to-b from-white to-pink-50">
+      <section id="products-section" className="py-12 px-8 bg-gradient-to-b from-white to-pink-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-display font-bold text-milin-900 mb-8">
             {selectedCategory ? 'Filtered Products' : 'Featured Collections'}
@@ -134,7 +150,12 @@ export default function StorefrontHome() {
 
           {loading ? (
             <div className="text-center py-12">
+              <div className="inline-block w-8 h-8 border-4 border-milin-500 border-t-transparent rounded-full animate-spin mb-4"></div>
               <p className="text-gray-500">Loading products...</p>
+            </div>
+          ) : products.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-500">No products found.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -145,13 +166,17 @@ export default function StorefrontHome() {
                   className="group"
                 >
                   <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
-                    <div className="relative h-96 bg-gray-200 overflow-hidden">
-                      {product.images?.[0] && (
+                    <div className="relative h-64 bg-gradient-to-br from-pink-100 to-pink-200 overflow-hidden">
+                      {product.images?.[0] ? (
                         <img
                           src={product.images[0].url}
                           alt={product.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                         />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <ShoppingBag className="w-16 h-16 text-pink-300" />
+                        </div>
                       )}
                       {product.stock > 0 && (
                         <div className="absolute top-4 right-4 bg-milin-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
