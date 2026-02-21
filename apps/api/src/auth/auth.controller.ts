@@ -14,7 +14,6 @@ import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto, AuthResponseDto } from './auth.dto';
 import { AuthGuard } from './auth.guard';
-import { RefreshTokenSchema } from '@luxe/validation';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -41,9 +40,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Refresh access token' })
   async refresh(@Request() req: any, @Body() body: { refreshToken: string }) {
-    try {
-      RefreshTokenSchema.parse(body);
-    } catch (error) {
+    if (!body.refreshToken || typeof body.refreshToken !== 'string') {
       throw new BadRequestException('Invalid refresh token format');
     }
 

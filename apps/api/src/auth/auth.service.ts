@@ -2,13 +2,11 @@ import {
   Injectable,
   UnauthorizedException,
   ConflictException,
-  BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto, RegisterDto, AuthResponseDto } from './auth.dto';
-import { UserRole } from '@luxe/types';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +35,7 @@ export class AuthService {
         password: hashedPassword,
         firstName: dto.firstName,
         lastName: dto.lastName,
-        role: UserRole.USER,
+        role: 'USER',
         profile: {
           create: {},
         },
@@ -104,7 +102,7 @@ export class AuthService {
   private async generateTokens(
     userId: string,
     email: string,
-    role: UserRole,
+    role: string,
   ): Promise<AuthResponseDto> {
     const accessTokenSecret = process.env.JWT_ACCESS_SECRET || 'dev-secret';
     const refreshTokenSecret = process.env.JWT_REFRESH_SECRET || 'dev-secret';
