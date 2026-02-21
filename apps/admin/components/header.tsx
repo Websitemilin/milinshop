@@ -29,19 +29,19 @@ export function Header() {
   return (
     <header className="bg-gradient-to-r from-white to-pink-50 border-b border-pink-200 px-8 py-4 flex justify-between items-center shadow-sm">
       <div className="flex items-center space-x-2">
-        <Sparkles className="w-5 h-5 text-milin-500" />
-        <div className="text-milin-900">
-          <h2 className="text-lg font-semibold font-display">Milin Shop Admin</h2>
-          <p className="text-sm text-milin-600">{user?.email}</p>
+        <Sparkles className="w-5 h-5 text-mirin-500" />
+        <div className="text-mirin-900">
+          <h2 className="text-lg font-semibold font-display">Mirin Shop Admin</h2>
+          <p className="text-sm text-mirin-600">{user?.email}</p>
         </div>
       </div>
 
       <div className="flex items-center space-x-4">
         <button className="p-2 hover:bg-pink-100 rounded-lg transition-colors">
-          <Bell className="w-5 h-5 text-milin-600" />
+          <Bell className="w-5 h-5 text-mirin-600" />
         </button>
 
-        <div className="w-10 h-10 bg-gradient-to-br from-milin-500 to-rose-400 rounded-full flex items-center justify-center text-white font-bold shadow-md">
+        <div className="w-10 h-10 bg-gradient-to-br from-mirin-500 to-rose-400 rounded-full flex items-center justify-center text-white font-bold shadow-md">
           {user?.email?.[0]?.toUpperCase()}
         </div>
 
@@ -50,7 +50,7 @@ export function Header() {
           className="p-2 hover:bg-pink-100 rounded-lg transition-colors"
           title="Logout"
         >
-          <LogOut className="w-5 h-5 text-milin-600" />
+          <LogOut className="w-5 h-5 text-mirin-600" />
         </button>
       </div>
     </header>

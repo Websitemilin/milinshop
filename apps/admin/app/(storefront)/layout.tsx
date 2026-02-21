@@ -4,7 +4,7 @@ import { StorefrontHeader } from '@/components/storefront-header';
 import { StorefrontFooter } from '@/components/storefront-footer';
 
 export const metadata: Metadata = {
-  title: 'Milin Shop - Luxury Women\'s Fashion Rental',
+  title: 'Mirin Shop - Luxury Women\'s Fashion Rental',
   description: 'Rent luxury designer clothing and accessories for every occasion. From evening gowns to designer blazers.',
 };
 

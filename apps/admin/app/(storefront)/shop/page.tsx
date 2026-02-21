@@ -53,11 +53,11 @@ export default function StorefrontHome() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-milin-500 via-rose-400 to-milin-600 text-white py-20 px-8">
+      <section className="bg-gradient-to-r from-mirin-500 via-rose-400 to-mirin-600 text-white py-20 px-8">
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Sparkles className="w-8 h-8" />
-            <h1 className="text-5xl md:text-6xl font-display font-bold">Milin Shop</h1>
+            <h1 className="text-5xl md:text-6xl font-display font-bold">Mirin Shop</h1>
             <Sparkles className="w-8 h-8" />
           </div>
           <p className="text-xl md:text-2xl mb-4 font-light">
@@ -71,7 +71,7 @@ export default function StorefrontHome() {
             onClick={() => {
               document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="bg-white text-milin-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow"
+            className="bg-white text-mirin-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow"
           >
             Shop Now
           </button>
@@ -83,24 +83,24 @@ export default function StorefrontHome() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-milin-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
+              <div className="w-16 h-16 bg-mirin-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
                 <Heart className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-semibold text-milin-900 mb-2">Curated Collection</h3>
+              <h3 className="text-lg font-semibold text-mirin-900 mb-2">Curated Collection</h3>
               <p className="text-gray-600">Handpicked luxury designer pieces for every occasion</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-milin-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
+              <div className="w-16 h-16 bg-mirin-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
                 <ShoppingBag className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-semibold text-milin-900 mb-2">Easy Rental</h3>
+              <h3 className="text-lg font-semibold text-mirin-900 mb-2">Easy Rental</h3>
               <p className="text-gray-600">Simple process from browsing to checkout</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-milin-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
+              <div className="w-16 h-16 bg-mirin-500 rounded-full flex items-center justify-center text-white mx-auto mb-4">
                 <Sparkles className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-semibold text-milin-900 mb-2">Premium Quality</h3>
+              <h3 className="text-lg font-semibold text-mirin-900 mb-2">Premium Quality</h3>
               <p className="text-gray-600">All pieces thoroughly cleaned and maintained</p>
             </div>
           </div>
@@ -111,14 +111,14 @@ export default function StorefrontHome() {
       {categories.length > 0 && (
         <section className="py-12 px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-display font-bold text-milin-900 mb-8">Shop by Category</h2>
+            <h2 className="text-3xl font-display font-bold text-mirin-900 mb-8">Shop by Category</h2>
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => setSelectedCategory(null)}
                 className={`px-6 py-3 rounded-full font-semibold transition-all ${
                   selectedCategory === null
-                    ? 'bg-milin-500 text-white shadow-md'
-                    : 'bg-pink-100 text-milin-900 hover:bg-milin-200'
+                    ? 'bg-mirin-500 text-white shadow-md'
+                    : 'bg-pink-100 text-mirin-900 hover:bg-mirin-200'
                 }`}
               >
                 All
@@ -129,8 +129,8 @@ export default function StorefrontHome() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`px-6 py-3 rounded-full font-semibold transition-all ${
                     selectedCategory === cat.id
-                      ? 'bg-milin-500 text-white shadow-md'
-                      : 'bg-pink-100 text-milin-900 hover:bg-milin-200'
+                      ? 'bg-mirin-500 text-white shadow-md'
+                      : 'bg-pink-100 text-mirin-900 hover:bg-mirin-200'
                   }`}
                 >
                   {cat.name}
@@ -144,13 +144,13 @@ export default function StorefrontHome() {
       {/* Products Grid */}
       <section id="products-section" className="py-12 px-8 bg-gradient-to-b from-white to-pink-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-display font-bold text-milin-900 mb-8">
+          <h2 className="text-3xl font-display font-bold text-mirin-900 mb-8">
             {selectedCategory ? 'Filtered Products' : 'Featured Collections'}
           </h2>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-milin-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div className="inline-block w-8 h-8 border-4 border-mirin-500 border-t-transparent rounded-full animate-spin mb-4"></div>
               <p className="text-gray-500">Loading products...</p>
             </div>
           ) : products.length === 0 ? (
@@ -179,13 +179,13 @@ export default function StorefrontHome() {
                         </div>
                       )}
                       {product.stock > 0 && (
-                        <div className="absolute top-4 right-4 bg-milin-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <div className="absolute top-4 right-4 bg-mirin-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                           Available
                         </div>
                       )}
                     </div>
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold text-milin-900 mb-2 group-hover:text-milin-600">
+                      <h3 className="text-lg font-semibold text-mirin-900 mb-2 group-hover:text-mirin-600">
                         {product.title}
                       </h3>
                       <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -193,14 +193,14 @@ export default function StorefrontHome() {
                       </p>
                       <div className="flex justify-between items-center">
                         <div>
-                          <p className="text-milin-600 font-bold text-lg">
+                          <p className="text-mirin-600 font-bold text-lg">
                             ฿{product.dailyPrice.toLocaleString()}/day
                           </p>
                           <p className="text-gray-500 text-xs">
                             Deposit: ฿{product.depositPrice.toLocaleString()}
                           </p>
                         </div>
-                        <button className="bg-milin-500 text-white p-2 rounded-lg hover:bg-milin-600 transition-colors">
+                        <button className="bg-mirin-500 text-white p-2 rounded-lg hover:bg-mirin-600 transition-colors">
                           <ShoppingBag className="w-5 h-5" />
                         </button>
                       </div>
@@ -214,7 +214,7 @@ export default function StorefrontHome() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-milin-800 to-rose-800 text-white py-16 px-8">
+      <section className="bg-gradient-to-r from-mirin-800 to-rose-800 text-white py-16 px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-display font-bold mb-4">Ready to Rent?</h2>
           <p className="text-lg mb-8 opacity-90">
@@ -222,7 +222,7 @@ export default function StorefrontHome() {
           </p>
           <Link
             href="/auth/register"
-            className="bg-white text-milin-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow inline-block"
+            className="bg-white text-mirin-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow inline-block"
           >
             Get Started Today
           </Link>

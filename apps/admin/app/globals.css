@@ -17,17 +17,17 @@ body {
 }
 
 h1, h2, h3 {
-  @apply font-display font-bold text-milin-900;
+  @apply font-display font-bold text-mirin-900;
 }
 
 a {
-  @apply text-milin-600 hover:text-milin-700 transition-colors;
+  @apply text-mirin-600 hover:text-mirin-700 transition-colors;
 }
 
 input,
 textarea,
 select {
-  @apply focus:outline-none focus:ring-2 focus:ring-milin-500 focus:border-transparent;
+  @apply focus:outline-none focus:ring-2 focus:ring-mirin-500 focus:border-transparent;
 }
 
 button:disabled {
@@ -36,18 +36,18 @@ button:disabled {
 
 /* Luxury button styles */
 .btn-primary {
-  @apply bg-milin-500 hover:bg-milin-600 text-white font-medium py-2 px-4 rounded-lg transition-all shadow-md hover:shadow-lg;
+  @apply bg-mirin-500 hover:bg-mirin-600 text-white font-medium py-2 px-4 rounded-lg transition-all shadow-md hover:shadow-lg;
 }
 
 .btn-secondary {
-  @apply bg-milin-50 hover:bg-milin-100 text-milin-700 font-medium py-2 px-4 rounded-lg transition-all border border-milin-200;
+  @apply bg-mirin-50 hover:bg-mirin-100 text-mirin-700 font-medium py-2 px-4 rounded-lg transition-all border border-mirin-200;
 }
 
 /* Gradient accents */
-.gradient-milin {
-  @apply bg-gradient-to-r from-milin-500 via-rose-400 to-milin-600;
+.gradient-mirin {
+  @apply bg-gradient-to-r from-mirin-500 via-rose-400 to-mirin-600;
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-milin-600 to-rose-500 bg-clip-text text-transparent font-display;
+  @apply bg-gradient-to-r from-mirin-600 to-rose-500 bg-clip-text text-transparent font-display;
 }

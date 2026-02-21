@@ -9,7 +9,7 @@ import { Mail, Lock, Eye, EyeOff, Loader, AlertCircle, Sparkles } from 'lucide-r
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@milinshop.com');
+  const [email, setEmail] = useState('admin@mirinshop.com');
   const [password, setPassword] = useState('Admin@123456');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,16 +33,16 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white via-pink-50 to-milin-100 flex items-center justify-center px-4">
+    <main className="min-h-screen bg-gradient-to-br from-white via-pink-50 to-mirin-100 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Sparkles className="w-8 h-8 text-milin-500" />
-            <h1 className="text-4xl font-display font-bold text-milin-900">
-              Milin Shop
+            <Sparkles className="w-8 h-8 text-mirin-500" />
+            <h1 className="text-4xl font-display font-bold text-mirin-900">
+              Mirin Shop
             </h1>
-            <Sparkles className="w-8 h-8 text-milin-500" />
+            <Sparkles className="w-8 h-8 text-mirin-500" />
           </div>
           <p className="text-gray-600 font-semibold">Admin Dashboard</p>
         </div>
@@ -68,8 +68,8 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@milinshop.com"
-                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-milin-500 focus:border-transparent"
+                  placeholder="admin@mirinshop.com"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-mirin-500 focus:border-transparent"
                   disabled={loading}
                   required
                 />
@@ -88,7 +88,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-milin-500 focus:border-transparent"
+                  className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-mirin-500 focus:border-transparent"
                   disabled={loading}
                   required
                 />
@@ -110,7 +110,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-milin-500 to-rose-400 hover:from-milin-600 hover:to-rose-500 text-white font-semibold py-3 rounded-lg transition-all disabled:opacity-50 flex items-center justify-center space-x-2"
+              className="w-full bg-gradient-to-r from-mirin-500 to-rose-400 hover:from-mirin-600 hover:to-rose-500 text-white font-semibold py-3 rounded-lg transition-all disabled:opacity-50 flex items-center justify-center space-x-2"
             >
               {loading ? (
                 <>
@@ -125,14 +125,14 @@ export default function LoginPage() {
         </div>
 
         {/* Demo Credentials */}
-        <div className="mt-6 bg-milin-50 border border-milin-200 rounded-lg p-4">
+        <div className="mt-6 bg-mirin-50 border border-mirin-200 rounded-lg p-4">
           <p className="text-gray-700 font-semibold text-sm mb-3">Demo Credentials:</p>
           <div className="space-y-2 text-sm">
             <p>
               <span className="text-gray-600">Admin:</span>
               <br />
               <code className="bg-white px-2 py-1 rounded text-xs font-mono">
-                admin@milinshop.com / Admin@123456
+                admin@mirinshop.com / Admin@123456
               </code>
             </p>
             <p>

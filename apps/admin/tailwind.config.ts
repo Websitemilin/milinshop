@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        milin: {
-          // Hot pink/Magenta palette for Milin Shop luxury brand
+        mirin: {
+          // Hot pink/Magenta palette for Mirin Shop luxury brand
           50: '#fdf2f8',
           100: '#fce7f3',
           200: '#fbcfe8',

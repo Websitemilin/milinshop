@@ -5,7 +5,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-white via-pink-50 to-pink-100 flex items-center justify-center">
       <div className="text-center max-w-lg px-6">
         <div className="mb-8">
-          <h1 className="text-5xl font-bold text-pink-800 mb-3">✨ Milin Shop</h1>
+          <h1 className="text-5xl font-bold text-pink-800 mb-3">✨ Mirin Shop</h1>
           <p className="text-xl text-gray-600 mb-2">Luxury Women's Fashion Rental</p>
           <p className="text-gray-500">Premium designer pieces for every occasion</p>
         </div>

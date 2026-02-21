@@ -26,21 +26,21 @@ export function ProductCard({
           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
         />
         {available && (
-          <div className="absolute top-4 right-4 bg-milin-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+          <div className="absolute top-4 right-4 bg-mirin-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
             Available
           </div>
         )}
       </div>
       <div className="p-4">
-        <h3 className="text-lg font-semibold text-milin-900 mb-2 group-hover:text-milin-600 line-clamp-2">
+        <h3 className="text-lg font-semibold text-mirin-900 mb-2 group-hover:text-mirin-600 line-clamp-2">
           {title}
         </h3>
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-milin-600 font-bold">฿{dailyPrice.toLocaleString()}/day</p>
+            <p className="text-mirin-600 font-bold">฿{dailyPrice.toLocaleString()}/day</p>
             <p className="text-gray-500 text-xs">Deposit: ฿{depositPrice.toLocaleString()}</p>
           </div>
-          <button className="bg-milin-500 text-white p-2 rounded-lg hover:bg-milin-600 transition-colors">
+          <button className="bg-mirin-500 text-white p-2 rounded-lg hover:bg-mirin-600 transition-colors">
             <ShoppingBag className="w-5 h-5" />
           </button>
         </div>

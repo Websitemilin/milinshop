@@ -6,21 +6,21 @@ export function StorefrontHeader() {
     <header className="border-b border-pink-200 bg-white sticky top-0 z-40 shadow-sm">
       <nav className="max-w-6xl mx-auto px-8 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
-          <Sparkles className="w-6 h-6 text-milin-500" />
-          <span className="text-2xl font-display font-bold text-milin-600">Milin Shop</span>
+          <Sparkles className="w-6 h-6 text-mirin-500" />
+          <span className="text-2xl font-display font-bold text-mirin-600">Mirin Shop</span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-gray-700 hover:text-milin-600 transition">
+          <Link href="/" className="text-gray-700 hover:text-mirin-600 transition">
             Home
           </Link>
-          <Link href="/shop" className="text-gray-700 hover:text-milin-600 transition">
+          <Link href="/shop" className="text-gray-700 hover:text-mirin-600 transition">
             Shop
           </Link>
-          <Link href="/about" className="text-gray-700 hover:text-milin-600 transition">
+          <Link href="/about" className="text-gray-700 hover:text-mirin-600 transition">
             About
           </Link>
-          <Link href="/rental-guide" className="text-gray-700 hover:text-milin-600 transition">
+          <Link href="/rental-guide" className="text-gray-700 hover:text-mirin-600 transition">
             How It Works
           </Link>
         </div>
@@ -31,7 +31,7 @@ export function StorefrontHeader() {
           </button>
           <Link href="/cart" className="p-2 hover:bg-pink-50 rounded-lg transition relative">
             <ShoppingBag className="w-6 h-6 text-gray-700" />
-            <span className="absolute -top-1 -right-1 bg-milin-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 bg-mirin-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               0
             </span>
           </Link>
