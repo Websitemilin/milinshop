@@ -4,7 +4,7 @@ import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class AuthGuard extends PassportAuthGuard('jwt') implements CanActivate {
-  constructor(private reflector: Reflector) {
+  constructor(private readonly _reflector: Reflector) {
     super();
   }
 

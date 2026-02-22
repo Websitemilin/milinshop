@@ -12,7 +12,7 @@ import { AddToCartDto, UpdateCartItemDto } from './cart.dto';
 export class CartService {
   constructor(
     private prisma: PrismaService,
-    private redis: RedisService,
+    private readonly _redis: RedisService,
   ) {}
 
   async getCart(userId: string) {

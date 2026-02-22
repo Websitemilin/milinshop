@@ -127,7 +127,7 @@ export class ProductsService {
   }
 
   async uploadImage(productId: string, url: string, alt?: string) {
-    const product = await this.getProduct(productId);
+    await this.getProduct(productId); // Validate product exists
 
     const order = await this.prisma.productImage.count({
       where: { productId },

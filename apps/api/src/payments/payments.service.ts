@@ -113,7 +113,7 @@ export class PaymentsService {
         currency: paymentIntent.currency.toUpperCase(),
         status: 'SUCCEEDED',
         stripePaymentIntentId: paymentIntent.id,
-        stripeChargeId: paymentIntent.charges.data[0]?.id,
+        stripeChargeId: (paymentIntent as any).charges?.data?.[0]?.id,
       },
     });
 
